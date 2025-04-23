@@ -4,59 +4,49 @@ def limpiar_consola():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def tabla_verdad(operacion):
-    limpiar_consola()
-    print(f"\nTabla de verdad para: A {nombres_operaciones[operacion]}")
+    print(f"\nTabla de verdad para: A {operacion} B")
     print("A\tB\tResultado")
     
     for A in [False, True]:
         for B in [False, True]:
-            if operacion == "1":
+            if operacion == "AND":
                 resultado = A and B
-            elif operacion == "2":
+            elif operacion == "OR":
                 resultado = A or B
-            elif operacion == "3":
+            elif operacion == "XOR":
                 resultado = A != B
-            elif operacion == "4":
+            elif operacion == "NAND":
                 resultado = not (A and B)
-            elif operacion == "5":
+            elif operacion == "NOR":
                 resultado = not (A or B)
-            elif operacion == "6":
+            elif operacion == "IMPLICA":
                 resultado = (not A) or B
-            elif operacion == "7":
+            elif operacion == "EQUIVALENCIA":
                 resultado = A == B
             else:
-                print("Operación no válida.")
+                print("⚠️  Operación no válida.")
                 return
             print(f"{int(A)}\t{int(B)}\t{int(resultado)}")
 
-# Diccionario para mostrar nombres de operaciones
-nombres_operaciones = {
-    "1": "AND",
-    "2": "OR",
-    "3": "XOR",
-    "4": "NAND",
-    "5": "NOR",
-    "6": "IMPLICA",
-    "7": "EQUIVALENCIA"
-}
+# Menú para el usuario
+operacion = ""
 
-operacion = ""  
-
-while operacion != "0":
+while operacion != "SALIR":
+    limpiar_consola()
     print("═════════════════════════════════════")
     print("      GENERADOR DE TABLA DE VERDAD   ")
     print("═════════════════════════════════════")
-    print("Operaciones disponibles:")
-    for clave, nombre in nombres_operaciones.items():
-        print(f"{clave} - {nombre}")
-    print("0 - Salir")
-    operacion = input("Seleccione una operación: ").strip()
-
-    if operacion in nombres_operaciones:
+    print("Seleccione una operación:")
+    print("AND")
+    print("OR")
+    print("XOR")
+    print("NAND")
+    print("NOR")
+    print("IMPLICA")
+    print("EQUIVALENCIA")
+    print("SALIR")
+    operacion = input("\nElegí una operación lógica: ").strip().upper()
+    
+    if operacion != "SALIR":
         tabla_verdad(operacion)
-        input("\nPresione Enter para volver al menú...")
-        limpiar_consola()
-    elif operacion != "0":
-        limpiar_consola()
-        print("⚠️  Opción no válida. Intente de nuevo.\n")
-
+        input("\nPresione Enter para continuar...")
